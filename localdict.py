@@ -1,14 +1,17 @@
 class LocalDict:
     def __init__(self):
-        with open("/usr/share/dict/words") as f:
+        with open("words_alpha.txt") as f:
             self.__dictionary = set(f.read().splitlines())
 
-    def __is_a_word(self, word):
-        return word in self.__dictionary
-
-    def any_words(self, combos):
+    def possible_words(self, letters, key):
         words = []
-        for combo in combos:
-            if self.__is_a_word("".join(combo)):
-                words.append("".join(combo))
+        for word in self.__dictionary:
+            if key in word and all(letter in letters for letter in word):
+                words.append(word)
         return words
+
+
+d = LocalDict()
+letters = ['c', 'o', 'v', 'n', 'i', 'g', 'u']
+key = 'o'
+print(d.possible_words(letters, key))

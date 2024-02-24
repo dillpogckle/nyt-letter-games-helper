@@ -1,5 +1,4 @@
-from util import make_combos, get_single_letter
-from localdict import LocalDict
+from util import get_single_letter, get_words
 
 if __name__ == "__main__":
     print("Welcome to the ", end="")
@@ -24,12 +23,33 @@ if __name__ == "__main__":
 
     print("Perfect! Please wait while we get all the possible words...\n")
 
-    dictionary = LocalDict()
+    all_words = []
+    ten_letter_words = get_words(10, letters)
+    all_words.append(ten_letter_words)
+    nine_letter_words = get_words(9, letters)
+    all_words.append(nine_letter_words)
+    eight_letter_words = get_words(8, letters)
+    all_words.append(eight_letter_words)
+    seven_letter_words = get_words(7, letters)
+    all_words.append(seven_letter_words)
+    six_letter_words = get_words(6, letters)
+    all_words.append(six_letter_words)
+    five_letter_words = get_words(5, letters)
+    all_words.append(five_letter_words)
+    four_letter_words = get_words(4, letters)
+    all_words.append(four_letter_words)
 
-    seven_letter = make_combos(letters, 7, key)
-    seven_letter_words = dictionary.any_words(seven_letter)
-    print(seven_letter_words)
-    four_letter = make_combos(letters, 4, key)
-    four_letter_words = dictionary.any_words(four_letter)
-    print(four_letter_words)
+    len_words = 10
+    for lst in all_words:
+        print("All the possible words that are " + str(len_words) + " words long:")
+        if len(lst) == 0:
+            print("There are none :(\n")
+        else:
+            print(", ".join(lst))
+            print()
+        len_words -= 1
+
+
+
+
 
