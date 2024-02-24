@@ -1,7 +1,7 @@
 class LocalDict:
     def __init__(self):
-        with open("words_alpha.txt") as f:
-            self.__dictionary = set(f.read().splitlines())
+        with open("dictionary.txt") as f:
+            self.__dictionary = set(word.strip().lower() for word in f)
 
     def possible_words(self, letters, key):
         words = []
@@ -10,8 +10,14 @@ class LocalDict:
                 words.append(word)
         return words
 
-
-d = LocalDict()
-letters = ['c', 'o', 'v', 'n', 'i', 'g', 'u']
-key = 'o'
-print(d.possible_words(letters, key))
+    def possible_pangram(self, letters, words):
+        panagrams = []
+        for word in words:
+            copy_letters = letters[:]
+            for char in word:
+                if char in letters:
+                    if char in copy_letters:
+                        copy_letters.remove(char)
+            if len(copy_letters) == 0:
+                panagrams.append(word)
+        return panagrams

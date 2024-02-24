@@ -1,4 +1,5 @@
-from util import get_single_letter, get_words
+from util import get_single_letter
+from localdict import LocalDict
 
 if __name__ == "__main__":
     print("Welcome to the ", end="")
@@ -23,33 +24,29 @@ if __name__ == "__main__":
 
     print("Perfect! Please wait while we get all the possible words...\n")
 
-    all_words = []
-    ten_letter_words = get_words(10, letters)
-    all_words.append(ten_letter_words)
-    nine_letter_words = get_words(9, letters)
-    all_words.append(nine_letter_words)
-    eight_letter_words = get_words(8, letters)
-    all_words.append(eight_letter_words)
-    seven_letter_words = get_words(7, letters)
-    all_words.append(seven_letter_words)
-    six_letter_words = get_words(6, letters)
-    all_words.append(six_letter_words)
-    five_letter_words = get_words(5, letters)
-    all_words.append(five_letter_words)
-    four_letter_words = get_words(4, letters)
-    all_words.append(four_letter_words)
+    d = LocalDict()
+    answers = d.possible_words(letters, key)
+    answers = [word for word in answers if len(word) >= 4]
+    answers = list(set(answers))
+    answers.sort()
 
-    len_words = 10
-    for lst in all_words:
-        print("All the possible words that are " + str(len_words) + " words long:")
-        if len(lst) == 0:
-            print("There are none :(\n")
-        else:
-            print(", ".join(lst))
-            print()
-        len_words -= 1
+    print("Here is a list of possible answers:\n")
+    count = 0
+    for word in answers:
+        if count < 14:
+            print(word + ", ", end="")
+            count += 1
+        elif count == 14:
+            print(word)
+            count = 0
 
+    print("\n\nBut lets be honest you aren't just looking for any normal answers...")
+    print("Hit Enter to see the possible \033[1;31;40mpangrams\033[0m")
+    input()
+    pangrams = d.possible_pangram(letters, answers)
 
+    print("Today's potential \033[1;31;40mpangrams\033[0m are:")
+    for pangram in pangrams:
+        print("\033[1;31;40m" + pangram + "\033[0m")
 
-
-
+    print("\nThanks for using the \033[1;33;40mSpelling Bee Solver\033[0m!")
