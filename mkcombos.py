@@ -2,14 +2,8 @@ from itertools import combinations_with_replacement
 
 
 def make_combos(letters, num_char, key=None):
-    lst = list(combinations_with_replacement(letters, num_char))
+    combos = list(combinations_with_replacement(letters, num_char))
     if key is None:
-        return lst
+        return list(combos)
 
-    else:
-        temp = []
-        for combo in lst:
-            if key in combo:
-                temp.append(combo)
-        lst = temp
-        return temp
+    return [combo for combo in combos if key in combo]
