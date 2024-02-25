@@ -19,7 +19,7 @@ class LocalDict:
         with open("dictionary.txt") as f:
             self.__dictionary = set(word.strip().lower() for word in f)
 
-    def possible_words(self, letters, key):
+    def possible_words(self, letters, key=None):
         """
         Creates a list of words from dictionary that can be made using specified letters.
 
@@ -29,6 +29,6 @@ class LocalDict:
         """
         words = []
         for word in self.__dictionary:
-            if key in word and all(letter in letters for letter in word):
+            if (key is None or key in word) and all(letter in letters for letter in word):
                 words.append(word)
         return words

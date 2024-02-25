@@ -15,7 +15,7 @@ def get_single_letter():
             print("Invalid input. Please enter a single letter.")
 
 
-def get_sb_answers(letters, key=None):
+def get_answers(letters, key=None):
     """
     Creates a list of words that can fit constraints.
 
@@ -26,16 +26,12 @@ def get_sb_answers(letters, key=None):
     d = LocalDict()
     if key is not None:
         answers = d.possible_words(letters, key)
-        answers = [word for word in answers if len(word) >= 4]
-        answers = list(set(answers))
-        answers.sort()
-        return answers
     else:
-        answers = d.possible_words(letters, key)
-        answers = [word for word in answers if len(word) >= 4]
-        answers = list(set(answers))
-        answers.sort()
-        return answers
+        answers = d.possible_words(letters)
+    answers = [word for word in answers if len(word) >= 4]
+    answers = list(set(answers))
+    answers.sort()
+    return answers
 
 
 def print_answers(answers):
@@ -75,3 +71,17 @@ def possible_pangram(letters, words):
         if len(copy_letters) == 0:
             pangrams.append(word)
     return pangrams
+
+
+def remove_repeated_letters(words):
+    """
+    Checks a list of words and only returns words without repeated letters.
+    :param words: List of words to be checked.
+    :return: List of words from parameter that do not contain repeated letters.
+    """
+    no_repeats = []
+    for word in words:
+        word_as_set = set(word)
+        if len(word) == len(word_as_set):
+            no_repeats.append(word)
+    return no_repeats
