@@ -18,7 +18,7 @@ def get_single_letter():
             print(e)
 
 
-def get_answers(letters, key=None):
+def get_sb_answers(letters, leng, key=None):
     """
     Creates a list of words that can fit constraints.
 
@@ -31,7 +31,7 @@ def get_answers(letters, key=None):
         answers = d.possible_words(letters, key)
     else:
         answers = d.possible_words(letters)
-    answers = [word for word in answers if len(word) >= 4]
+    answers = [word for word in answers if len(word) >= leng]
     answers = list(set(answers))
     answers.sort()
     return answers
@@ -66,6 +66,28 @@ def possible_pangram(letters, words):
     """
     pangrams = [word for word in words if set(word) == set(letters)]
     return pangrams
+
+
+def get_box_answers(side1, side2, side3, side4):
+
+    answers = get_sb_answers(side1 + side2 + side3 + side4, 6)
+    filtered_answers = []
+
+    for word in answers:
+        keep_word = True
+        for i in range(len(word) - 1):
+            if (word[i] in side1 and word[i + 1] in side1) or \
+                    (word[i] in side2 and word[i + 1] in side2) or \
+                    (word[i] in side3 and word[i + 1] in side3) or \
+                    (word[i] in side4 and word[i + 1] in side4):
+                keep_word = False
+                break
+        if keep_word:
+            filtered_answers.append(word)
+
+    answers = filtered_answers
+
+    return answers
 
 
 def remove_repeated_letters(words):

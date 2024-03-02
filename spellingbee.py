@@ -1,5 +1,4 @@
-from util import get_single_letter, get_answers, print_answers, possible_pangram
-from time import sleep
+from util import get_single_letter, get_sb_answers, print_answers, possible_pangram
 
 
 def main():
@@ -20,11 +19,9 @@ def main():
     print("\nEnter your other six letters.")
     for i in range(6):
         letters.append(get_single_letter())
-    print("\nPerfect! Please wait while we get all the possible words...\n")
-    sleep(1.5)
 
     # Generating answers and outputting them
-    answers = get_answers(letters, key)
+    answers = get_sb_answers(letters, key, 4)
     print("Here is a list of possible answers:")
     print_answers(answers)
 
