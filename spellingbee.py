@@ -33,7 +33,7 @@ def main():
     input("Hit Enter to see today's possible \033[1;31;40mpangrams\033[0m.\n")
 
     # output pangrams
-    pangrams = possible_pangram(answers, letters)
+    pangrams = possible_pangram(letters, answers)
     if len(pangrams) == 0:
         print("Looks like our dictionary can't find any \033[1;31;40mpangrams\033[0m...\n"
               "Are you sure you put in the right letters?")

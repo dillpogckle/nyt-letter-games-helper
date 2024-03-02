@@ -8,11 +8,14 @@ def get_single_letter():
     :return: the single character if input is correct
     """
     while True:
-        user_input = input(">")
-        if len(user_input) == 1 and user_input.isalpha():
-            return user_input.lower()
-        else:
-            print("Invalid input. Please enter a single letter.")
+        try:
+            user_input = input(">")
+            if len(user_input) == 1 and user_input.isalpha():
+                return user_input.lower()
+            else:
+                raise ValueError("Invalid input. Please enter a single letter.")
+        except ValueError as e:
+            print(e)
 
 
 def get_answers(letters, key=None):
@@ -61,15 +64,7 @@ def possible_pangram(letters, words):
     :param words: List of words to be tested.
     :return: List of pangrams from words that used all letters.
     """
-    pangrams = []
-    for word in words:
-        copy_letters = letters[:]
-        for char in word:
-            if char in letters:
-                if char in copy_letters:
-                    copy_letters.remove(char)
-        if len(copy_letters) == 0:
-            pangrams.append(word)
+    pangrams = [word for word in words if set(word) == set(letters)]
     return pangrams
 
 
