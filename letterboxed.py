@@ -31,7 +31,7 @@ def main():
         side4.append(get_single_letter())
 
     answers = get_box_answers(side1, side2, side3, side4)
-    # answers = remove_repeated_letters(answers)
+    answers = remove_repeated_letters(answers)
 
     # output helpful words
     print("\nHere is a list of words to help with your \033[1;31;40mLetter Box\033[0m:")
