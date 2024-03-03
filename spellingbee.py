@@ -21,7 +21,7 @@ def main():
         letters.append(get_single_letter())
 
     # Generating answers and outputting them
-    answers = get_sb_answers(letters, key, 4)
+    answers = get_sb_answers(letters, 4, key)
     print("Here is a list of possible answers:")
     print_answers(answers)
 
